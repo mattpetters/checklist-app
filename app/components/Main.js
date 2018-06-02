@@ -19,14 +19,22 @@ export default class Main extends React.Component {
     }
 
       addItem(){
-        alert("Testing add item");
         if (this.state.newItemText){
             var date = new Date();
             this.state.listItems.push({
-                'date':date.getFullYear()
-            })
+                'text':this.state.newItemText
+            });
+            this.setState({
+                listItems: this.state.listItems,
+                newItemText: ''
+            });
         }
       }
+
+    deleteItem(key) {
+        this.state.listItems.splice(key, 1)
+        this.setState({listItems: this.state.listItems})
+    }
   render() {
       let items = this.state.listItems.map((val, key) => {
             return <ListItem key={key} keyId={key} val={val} deleteItem={()=> this.deleteItem(key) }/> 
@@ -36,10 +44,12 @@ export default class Main extends React.Component {
             <View style={styles.header}>
                 <Text style={styles.headerText}>Checkoff</Text>
             </View>
-            <ScrollView style={styles.scrollContainer}> </ScrollView>
+            <ScrollView style={styles.scrollContainer}> 
+                {items}
+        </ScrollView>
             <View style={styles.footer}>
                 <TextInput style={styles.input}
-                            onChangeText={(text) => this.setState({itemText: text})}
+                            onChangeText={(text) => this.setState({newItemText: text})}
                             value={this.state.itemText}
                             placeholder='> Enter Item' 
                             placeholderTextColor='white'
