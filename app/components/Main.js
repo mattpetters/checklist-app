@@ -3,6 +3,7 @@ import { StyleSheet,
     Text, 
     View,
     TextInput,
+    Button,
     ScrollView,
     TouchableOpacity,
     Alert
@@ -43,6 +44,7 @@ export default class Main extends React.Component {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Checkoff</Text>
+            <Button style={{fontSize: 40}} title='Go To Checklists' onPress={()=> this.props.navigation.navigate('Checklists') } />
             </View>
             <ScrollView style={styles.scrollContainer}> 
                 {items}
@@ -50,7 +52,7 @@ export default class Main extends React.Component {
             <View style={styles.footer}>
                 <TextInput style={styles.input}
                             onChangeText={(text) => this.setState({newItemText: text})}
-                            value={this.state.itemText}
+                            value={this.state.newItemText}
                             placeholder='> Enter Item' 
                             placeholderTextColor='white'
         />

@@ -1,11 +1,22 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Main from './app/components/Main';
+import ChecklistsScreen from './app/components/Screens/ChecklistsScreen';
+import { createStackNavigator } from 'react-navigation';
+
+const RootStack = createStackNavigator({
+    Main: Main ,
+    Checklists: ChecklistsScreen 
+}
+,{
+    initialRouteName:'Main'
+}
+);
 
 export default class App extends React.Component {
   render() {
     return (
-        <Main />
+        <RootStack />
     );
   }
 }
