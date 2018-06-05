@@ -18,18 +18,14 @@ class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            checklists: [
-                {id: 1, title: "Clean Room", tasks:[
-                    {id: 1, text: "Wipe down surfaces", listId: 1},
-                    {id: 2, text: "Run Laundry if needed", listId: 1},
-                    {id: 3, text: "Pick clothes up off the floor", listId: 1},
-                    {id: 4, text: "Make bed", listId: 1}
-
-                ]},
-                {id: 2, title: "Boat Launch"},
-                {id: 3, title: "Boat Arrival"},
-            ],
+            checklists: [] 
         };
+    }
+
+    componentDidMount(){
+        if (this.props.checklists) {
+            this.setState({checklists: this.props.checklists})
+        }
     }
 
     deleteItem(key) {
@@ -37,7 +33,7 @@ class Main extends React.Component {
         this.setState({listItems: this.state.listItems})
     }
   render() {
-      let lists = this.state.checklists.map((val, key) => {
+      let lists = this.props.checklists.map((val, key) => {
             return <ChecklistItem key={key} keyId={key} val={val} onPress={
                 () => {
                     this.props.navigation.navigate('ListScreen', {'list':val})
@@ -49,6 +45,7 @@ class Main extends React.Component {
             <ScrollView style={styles.scrollContainer}> 
                 {lists}
             </ScrollView>
+            <Button title="Add a List" onPress={this.props.onAddListPress}></Button>
         </View>
     );
 
@@ -101,14 +98,17 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  // let storedLists = state.checklists.map(list => ({ key: list.id, ...list }));
   return {
-    checklists: []
+    checklists: state.checklists
   };
 };
 
-const mapDispatchToProps = {
-  checklistActions
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddListPress: () => {dispatch(checklistActions.createChecklist())}  
+  };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
