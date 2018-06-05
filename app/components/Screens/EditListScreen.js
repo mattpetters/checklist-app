@@ -9,7 +9,6 @@ import { StyleSheet,
     Alert
 } from 'react-native';
 import ListItem from '../ListItem';
-import AppHeader from './AppHeader';
 
 export default class EditListScreen extends React.Component {
           static navigationOptions = ({ navigation }) => {
