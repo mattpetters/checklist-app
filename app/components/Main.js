@@ -8,7 +8,7 @@ import { StyleSheet,
     TouchableOpacity,
     Alert
 } from 'react-native';
-import ListItem from './ListItem';
+import ChecklistItem from './ChecklistItem';
 import AppHeader from './AppHeader';
 
 export default class Main extends React.Component {
@@ -16,28 +16,18 @@ export default class Main extends React.Component {
         super(props);
         this.state = {
             checklists: [
-                {text: "test 1"},
-                {text: "test 2"},
-                {text: "test 3"},
-                {text: "test 4"},
-                {text: "test 5"},
-                {text: "test 6"}
+                {id: 1, title: "Clean Room", tasks:[
+                    {id: 1, text: "Wipe down surfaces", listId: 1},
+                    {id: 2, text: "Run Laundry if needed", listId: 1},
+                    {id: 3, text: "Pick clothes up off the floor", listId: 1},
+                    {id: 4, text: "Make bed", listId: 1}
+
+                ]},
+                {id: 2, title: "Boat Launch"},
+                {id: 3, title: "Boat Arrival"},
             ],
         };
     }
-
-      addItem(){
-        if (this.state.newItemText){
-            var date = new Date();
-            this.state.listItems.push({
-                'text':this.state.newItemText
-            });
-            this.setState({
-                listItems: this.state.listItems,
-                newItemText: ''
-            });
-        }
-      }
 
     deleteItem(key) {
         this.state.listItems.splice(key, 1)
@@ -45,7 +35,12 @@ export default class Main extends React.Component {
     }
   render() {
       let lists = this.state.checklists.map((val, key) => {
-            return <ListItem key={key} keyId={key} val={val}/> 
+            return <ChecklistItem key={key} keyId={key} val={val} onPress={
+                () => {
+                    alert("Clicked")
+                    this.props.navigation.navigate('ListScreen', val)
+                }
+            } /> 
       });
     return (
         <View style={styles.container}>
