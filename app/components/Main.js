@@ -9,13 +9,20 @@ import { StyleSheet,
     Alert
 } from 'react-native';
 import ListItem from './ListItem';
+import AppHeader from './AppHeader';
 
 export default class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            listItems: [],
-            newItemText: ''
+            checklists: [
+                {text: "test 1"},
+                {text: "test 2"},
+                {text: "test 3"},
+                {text: "test 4"},
+                {text: "test 5"},
+                {text: "test 6"}
+            ],
         };
     }
 
@@ -37,29 +44,15 @@ export default class Main extends React.Component {
         this.setState({listItems: this.state.listItems})
     }
   render() {
-      let items = this.state.listItems.map((val, key) => {
-            return <ListItem key={key} keyId={key} val={val} deleteItem={()=> this.deleteItem(key) }/> 
+      let lists = this.state.checklists.map((val, key) => {
+            return <ListItem key={key} keyId={key} val={val}/> 
       });
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headerText}>Checkoff</Text>
-            <Button style={{fontSize: 40}} title='Go To Checklists' onPress={()=> this.props.navigation.navigate('Checklists') } />
-            </View>
+            <AppHeader />
             <ScrollView style={styles.scrollContainer}> 
-                {items}
-        </ScrollView>
-            <View style={styles.footer}>
-                <TextInput style={styles.input}
-                            onChangeText={(text) => this.setState({newItemText: text})}
-                            value={this.state.newItemText}
-                            placeholder='> Enter Item' 
-                            placeholderTextColor='white'
-        />
-            </View>
-            <TouchableOpacity onPress={this.addItem.bind(this)} style={styles.addButton}>
-                <Text style={styles.addButtonText}>+</Text> 
-            </TouchableOpacity>
+                {lists}
+            </ScrollView>
         </View>
     );
 
@@ -72,18 +65,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#5A23D1',
       },
-    headerText: {
-        color: 'white',
-        fontSize:18,
-        padding:40,
-    },
-    header: {
-        backgroundColor:'#834ef4',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: 10,
-        borderBottomColor: '#5726bf'
-    },
     scrollContainer:{
         flex: 1,
         marginBottom: 100

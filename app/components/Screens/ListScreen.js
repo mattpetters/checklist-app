@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, Text } from 'react-native';
-export default class TaskScreen extends React.Component {
+export default class ListScreen extends React.Component {
 
         render(){
             return (
             <View>
-                <Text>Hello World TaskScreen</Text>    
+                <Text>Hello World ListScreen</Text>    
             </View>
             )
         }
