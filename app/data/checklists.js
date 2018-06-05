@@ -17,6 +17,15 @@ export default function reducer(state = initialState, action = {}) {
         return Object.assign({}, state, { checklists: [...state.checklists, {id: 1, title:'New Empty List'}]})
     case UPDATE_LIST:
         //Not implemented
+        return state.checklists.map((list) => {
+            if (list.id === action.id) {
+                return {
+                    ...list,
+                    title: action.title,
+                    tasks: action.tasks
+                } 
+            } else return list;
+        })
       return state
     case REMOVE_LIST:
         //Not implemented

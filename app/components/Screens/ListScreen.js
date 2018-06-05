@@ -26,7 +26,7 @@ export default class ListScreen extends React.Component {
                 { tasks }
                 </ScrollView>
                 <Button title='Edit' onPress={()=>{
-                    alert("Transition to edit")
+                    this.props.navigation.navigate('EditListScreen', {'list':list})
                 }}></Button>
                 <Button title='Play' onPress={() => {
                     alert("Transition to play")
