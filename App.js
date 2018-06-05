@@ -5,6 +5,7 @@ import ChecklistsScreen from './app/components/Screens/ChecklistsScreen';
 import TaskScreen from './app/components/Screens/TaskScreen';
 import ListScreen from './app/components/Screens/ListScreen';
 import { createStackNavigator } from 'react-navigation';
+import colors from './app/util/colors';
 
 const RootStack = createStackNavigator({
     Main: Main ,
@@ -13,7 +14,17 @@ const RootStack = createStackNavigator({
     ListScreen: ListScreen
 }
 ,{
-    initialRouteName:'Main'
+    initialRouteName:'Main',
+     navigationOptions: {
+        title: 'Checkoff',
+      headerStyle: {
+        backgroundColor: colors.appHeaderColor,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }
 }
 );
 

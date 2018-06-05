@@ -4,10 +4,10 @@ import { StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 export default class ChecklistItem extends React.Component {
   render() {
     return (
-        <View key={this.props.keyId} style={styles.listItem}> 
+        <TouchableOpacity key={this.props.keyId} style={styles.listItem} onPress={this.props.onPress}> 
              <Text style={styles.itemText}> {this.props.val.date} </Text>
              <Text style={styles.itemText}> {this.props.val.title} </Text>
-        </View>
+        </TouchableOpacity>
     );
   }
 }

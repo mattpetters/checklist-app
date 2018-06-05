@@ -10,6 +10,7 @@ import { StyleSheet,
 } from 'react-native';
 import ChecklistItem from './ChecklistItem';
 import AppHeader from './AppHeader';
+import colors from '../util/colors';
 
 export default class Main extends React.Component {
     constructor(props){
@@ -37,14 +38,12 @@ export default class Main extends React.Component {
       let lists = this.state.checklists.map((val, key) => {
             return <ChecklistItem key={key} keyId={key} val={val} onPress={
                 () => {
-                    alert("Clicked")
-                    this.props.navigation.navigate('ListScreen', val)
+                    this.props.navigation.navigate('ListScreen', {'list':val})
                 }
             } /> 
       });
     return (
         <View style={styles.container}>
-            <AppHeader />
             <ScrollView style={styles.scrollContainer}> 
                 {lists}
             </ScrollView>
@@ -58,7 +57,7 @@ export default class Main extends React.Component {
 const styles = StyleSheet.create({
       container: {
         flex: 1,
-        backgroundColor: '#5A23D1',
+        backgroundColor: colors.bgColor,
       },
     scrollContainer:{
         flex: 1,
