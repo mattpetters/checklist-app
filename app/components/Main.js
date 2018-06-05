@@ -11,8 +11,10 @@ import { StyleSheet,
 import ChecklistItem from './ChecklistItem';
 import AppHeader from './AppHeader';
 import colors from '../util/colors';
+import { connect } from 'react-redux';
+import * as checklistActions from '../data/checklists';
 
-export default class Main extends React.Component {
+class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -97,3 +99,16 @@ const styles = StyleSheet.create({
         color: 'white'
     }
 });
+
+const mapStateToProps = state => {
+  // let storedLists = state.checklists.map(list => ({ key: list.id, ...list }));
+  return {
+    checklists: []
+  };
+};
+
+const mapDispatchToProps = {
+  checklistActions
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

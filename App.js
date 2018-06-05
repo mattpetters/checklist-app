@@ -6,6 +6,9 @@ import TaskScreen from './app/components/Screens/TaskScreen';
 import ListScreen from './app/components/Screens/ListScreen';
 import { createStackNavigator } from 'react-navigation';
 import colors from './app/util/colors';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, connect } from 'react-redux';
+import reducer from './app/data/checklists';
 
 const RootStack = createStackNavigator({
     Main: Main ,
@@ -28,10 +31,15 @@ const RootStack = createStackNavigator({
 }
 );
 
+const store = createStore(reducer);
+
+
 export default class App extends React.Component {
   render() {
     return (
-        <RootStack />
+        <Provider store={store}>
+            <RootStack />
+        </Provider>
     );
   }
 }
